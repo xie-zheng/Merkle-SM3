@@ -9,5 +9,10 @@ workflows:
   # Name the workflow "welcome"
   welcome:
     # Run the welcome/run job in its own container
-    jobs:
-      - welcome/run
+   jobs:
+    build:
+      docker:
+        - image: cimg/rust:1.51.0
+      steps:
+        - checkout
+        - run: cargo test
