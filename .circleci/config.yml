@@ -5,14 +5,10 @@ orbs:
   # Declare a dependency on the welcome-orb
   welcome: circleci/welcome-orb@0.4.1
 # Orchestrate or schedule a set of jobs
-workflows:
-  # Name the workflow "welcome"
-  welcome:
-    # Run the welcome/run job in its own container
-   jobs:
-    build:
-      docker:
-        - image: cimg/rust:1.51.0
-      steps:
-        - checkout
-        - run: cargo test
+jobs:
+  build:
+    docker:
+      - image: cimg/rust:1.51.0
+    steps:
+      - checkout
+      - run: cargo test
