@@ -5,9 +5,9 @@ pub fn sm3(data: &Vec<u8>) -> [u8; 32] {
 }
 
 struct SM3 {
-    digest: [u32; 8], // 哈希值
-    length: u64,      // 长度（比特）
-    message: Vec<u8>, // 原始消息
+    digest: [u32; 8], // 哈希值（初始值、迭代压缩中间值）
+    length: u64,      // 原始长度（比特）
+    message: Vec<u8>, // 原始或填充后的消息
 }
 
 // 初始值
@@ -83,7 +83,7 @@ fn u8_to_u32(buffer: &[u8], i: usize) -> u32 {
         | u32::from(buffer[i + 3])
 }
 
-// 原来j * 8 写成了j * 3（论单元测试的重要性）
+// 把u32整数转化为4个8u整数（大端）并放入指定位置
 fn u32_to_u8(buffer: &mut [u8], i: usize, num: u32) {
     for j in (0..4).rev() {
         buffer[i * 4 + 3 - j] = (num >> (j * 8)) as u8;
@@ -106,7 +106,13 @@ impl SM3 {
         self.message.push(0x80);
         let blocksize = 64;
         // 填充至l + 1 + k == 448mod512
-        for _ in 0..(56 - self.message.len() % blocksize) {
+        let mut fill = self.message.len() % blocksize;
+        if fill > 56 {
+            fill = 120 - fill;
+        } else {
+            fill = 56 - fill;
+        }
+        for _ in 0..fill {
             self.message.push(0x00);
         }
 

@@ -1,0 +1,36 @@
+William Shakespeare was an English poet
+and playwright who is considered one of
+the greatest writers to ever use the English language.
+He is also the most famous playwright in the world,
+with his plays being translated in over 50 languages
+and performed across the globe for audiences of all ages. Known colloquially as "The Bard" or "The Bard of Avon," Shakespeare was also an actor and the creator of the Globe Theatre, a historical theatre, and company that is visited by hundreds of thousands of tourists every year.
+
+His works span tragedy, comedy, and historical works, both in poetry and prose. And although the man is the most-recognized playwright in the world, very little of his life is actually known. No known autobiographical letters or diaries have survived to modern day, and with no surviving descendants, Shakespeare is a figure both of magnificent genius and mystery.
+
+This has led to many interpretations of his life and works, creating a legend out of the commoner from Stratford-upon-Avon who rose to prominence and in the process wrote many of the seminal works that provide the foundation for the current English language.
+
+i = 3
+result = [], pos = []
+
+level = 0
+i是奇数即右节点，目标值为左节点 -> i = i - 1 = 2
+result.push(0-2), pos.push(左)
+result = [0-2], pos = [左]
+i = i // 2 = 1
+
+level = 1
+i是奇数即右节点，目标值为左节点 -> i = i - 1 = 0
+result.posh(1-0), pos.push(左)
+result = [0-2, 1-0], pos = [左， 左]
+i = i // 2 = 0
+
+level = 2
+i是偶数即左节点，目标值为右节点 -> i = i + 1 = 1
+result.push(2-1), pos.push(右)
+result = [0-2, 1-0, 2-1], pos = [左, 左， 右]
+i = i // 2 = 0
+
+level = 3
+return result, pos
+
+
